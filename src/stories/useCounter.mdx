@@ -1,0 +1,40 @@
+# `useCounter`
+
+React state hook that tracks a numeric value.
+
+## Usage
+
+```jsx
+interface CounterProps {
+  initialValue: number;
+  max?: number | null;
+  min?: number | null;
+}
+const Comp = ({ initialValue, max = null, min = null }: CounterProps) => {
+  const [current, actions] = useCounter(initialValue, max, min);
+
+  return (
+    <div>
+      <h1>Max : {max}</h1>
+      <h1>Min : {min}</h1>
+      <button onClick={() => actions.dec()}>-</button>
+      {current}
+      <button onClick={() => actions.inc()}>+</button>
+      <button onClick={() => actions.reset()}>reset</button>
+    </div>
+  );
+};
+```
+
+## API
+
+```ts
+const [ current, { inc, dec, get, set, reset } ] = useCounter(initialValue: number, max: number | null = null, min: number | null = null);
+```
+
+- `current` - current counter value;
+- `get(): number` - getter of current counter value;
+- `inc(delta: number): void` - increment current value;
+- `dec(delta: number): void` - decrement current value;
+- `set(value: number): void` - set arbitrary value;
+- `reset(value: number): void` - as the `set`, but also will assign value by reference to the `initial` parameter;
