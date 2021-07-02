@@ -1,34 +1,21 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { useCounter } from "./useCounter";
 import mdx from "./useCounter.mdx";
-interface CounterProps {
-  initialValue: number;
-  max?: number | null;
-  min?: number | null;
-}
-const Comp = ({ initialValue, max = null, min = null }: CounterProps) => {
-  const [current, actions] = useCounter(initialValue, max, min);
-
-  return (
-    <div>
-      <h1>Max : {max}</h1>
-      <h1>Min : {min}</h1>
-      <button onClick={() => actions.dec()}>-</button>
-      {current}
-      <button onClick={() => actions.inc()}>+</button>
-      <button onClick={() => actions.reset()}>reset</button>
-    </div>
-  );
-};
+import { Comp } from "./Comp";
 export default {
   title: "Hooks/useCounter",
   component: Comp,
   argTypes: {
-    max: {
+    initialValue: {
+      description: "Initial value of counter",
       control: "number",
     },
-    min: { control: "number" },
+    min: { description: "Minimum value of counter", control: "number" },
+
+    max: {
+      description: "Maximum value of counter",
+      control: "number",
+    },
   },
   parameters: {
     docs: {
@@ -39,7 +26,7 @@ export default {
 
 const Template: ComponentStory<typeof Comp> = (args) => <Comp {...args} />;
 
-export const Demo = Template.bind({});
-Demo.args = {
+export const Usage = Template.bind({});
+Usage.args = {
   initialValue: 0,
 };

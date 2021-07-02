@@ -9,8 +9,8 @@ export interface CounterActions {
 }
 export const useCounter = (
   initialValue: number = 0,
-  max: number | null = null,
-  min: number | null = null
+  min: number | null = null,
+  max: number | null = null
 ): [number, CounterActions] => {
   const [value, setValue] = useState(initialValue);
   useEffect(() => {
